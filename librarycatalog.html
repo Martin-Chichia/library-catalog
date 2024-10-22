@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Catalog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        Library Book Catalog
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search by title or author...">
+    </div>
+
+    <main>
+        <div id="catalog"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Library Portal. All Rights Reserved.</p>
+    </footer>
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.header {
+    background-color: #90EE90;
+    color: #003366;
+    text-align: center;
+    padding: 1rem;
+    height: 20px;
+    font-size: 30px;
+    font-weight: 700px;
+    font-family: Arial, sans-serif;
+}
+
+.search-container {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+#searchInput {
+    padding: 0.5rem;
+    width: 80%;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.book-card {
+    background-color: white;
+    margin: 0.5rem;
+    padding: 1rem;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.book-card h3 {
+    color: #003366;
+}
+
+.book-card p {
+    margin: 0.5rem 0;
+}
+
+</style>
+    <script>
+        // Sample book data
+const books = [
+    { title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960 },
+    { title: "1984", author: "George Orwell", year: 1949 },
+    { title: "The Great Gatsby", author: "F. Scott Fitzgerald", year: 1925 },
+    { title: "Moby-Dick", author: "Herman Melville", year: 1851 },
+    { title: "Pride and Prejudice", author: "Jane Austen", year: 1813 }
+];
+
+// Function to display books
+function displayBooks(bookList) {
+    const catalog = document.getElementById('catalog');
+    catalog.innerHTML = ''; // Clear previous results
+
+    bookList.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+        bookCard.innerHTML = `
+            <h3>${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p><strong>Year:</strong> ${book.year}</p>
+        `;
+        catalog.appendChild(bookCard);
+    });
+}
+
+// Display all books initially
+displayBooks(books);
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function (e) {
+    const searchText = e.target.value.toLowerCase();
+    const filteredBooks = books.filter(book =>
+        book.title.toLowerCase().includes(searchText) ||
+        book.author.toLowerCase().includes(searchText)
+    );
+    displayBooks(filteredBooks);
+});
+
+    </script>
+</body>
+</html>
